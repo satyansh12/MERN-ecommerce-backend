@@ -85,9 +85,10 @@ server.use(
   })
 );
 server.use(passport.authenticate('session'));
+
 const corsOptions = {
-  origin: '*', // Allow all origins
-  credentials: true, // Accept credentials
+  origin: ['https://mern-ecommerce-frontend-lyart.vercel.app/'], // Replace with your frontend domain
+  credentials: true,
 };
 server.use(cors(corsOptions));
 
