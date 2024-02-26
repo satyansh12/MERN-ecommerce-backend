@@ -86,11 +86,11 @@ server.use(
 );
 server.use(passport.authenticate('session'));
 
-const corsOptions = {
-  origin: ['https://mern-ecommerce-frontend-lyart.vercel.app/'], // Replace with your frontend domain
-  credentials: true,
-};
-server.use(cors(corsOptions));
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 server.use(express.json()); // to parse req.body
 
