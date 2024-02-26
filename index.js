@@ -80,17 +80,23 @@ server.use(cookieParser());
 server.use(
   session({
     secret: process.env.SESSION_KEY,
-    resave: false, // don't save session if unmodified
-    saveUninitialized: false, // don't create session until something stored
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URL }),
+    cookie: {
+      secure: true, // Ensure cookies are sent over HTTPS
+      httpOnly: true, // Prevent client-side JS from reading the cookie
+      sameSite: 'none', // Necessary for cross-site requests
+    },
   })
 );
-server.use(passport.authenticate('session'));
 
-server.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+server.use(passport.authenticate('session'));
+const corsOptions = {
+  origin: ['https://mern-ecommerce-frontend-lyart.vercel.app/','https://mern-ecommerce-frontend-git-master-satyansh12s-projects.vercel.app/', 'https://mern-ecommerce-frontend-lrxkpnlkq-satyansh12s-projects.vercel.app/'], // Replace with your actual frontend domain
+  credentials: true,
+};
+server.use(cors(corsOptions));
 
 server.use(express.json()); // to parse req.body
 
