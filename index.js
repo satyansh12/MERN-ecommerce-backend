@@ -86,7 +86,7 @@ server.use(
 );
 server.use(passport.authenticate('session'));
 
-app.use((req, res, next) => {
+server.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
