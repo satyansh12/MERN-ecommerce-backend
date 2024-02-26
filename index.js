@@ -95,10 +95,14 @@ server.use(
 server.use(passport.authenticate('session'));
 
 const corsOptions = {
-  origin: ['https://mern-ecommerce-frontend-lyart.vercel.app/','https://mern-ecommerce-frontend-git-master-satyansh12s-projects.vercel.app/', 'https://mern-ecommerce-frontend-lrxkpnlkq-satyansh12s-projects.vercel.app/'], 
-  credentials: true, // To accept cookies via cross-origin requests
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed request methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed request headers
+  origin: [
+    'https://mern-ecommerce-frontend-lyart.vercel.app',
+    'https://mern-ecommerce-frontend-git-master-satyansh12s-projects.vercel.app',
+    'https://mern-ecommerce-frontend-lrxkpnlkq-satyansh12s-projects.vercel.app'
+  ], // Removed trailing slashes
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
 server.use(cors(corsOptions));
