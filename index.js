@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+const MongoStore = require('connect-mongo'); // Use MongoDB for session store
 const express = require('express');
 const server = express();
 const mongoose = require('mongoose');
