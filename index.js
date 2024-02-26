@@ -85,12 +85,11 @@ server.use(
   })
 );
 server.use(passport.authenticate('session'));
-
-server.use(cors({
-  origin: true, // Reflect the request origin
-  credentials: true, // Accept credentials for cross-origin requests
-  exposedHeaders: ['X-Total-Count'],
-}));
+const corsOptions = {
+  origin: '*', // Allow all origins
+  credentials: true, // Accept credentials
+};
+server.use(cors(corsOptions));
 
 server.use(express.json()); // to parse req.body
 
